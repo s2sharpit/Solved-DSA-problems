@@ -1,14 +1,14 @@
 class Solution {
     public boolean checkIfPangram(String sentence) {
-        int[] count = new int[26];
-        
-        for (int i=0; i<sentence.length(); i++) {
-            count[sentence.charAt(i) - 'a']++;
-        }
-
-        for (int val: count) {
-            if (val == 0) return false;
-        }
-        return true;
+        if (sentence.length() < 26) {
+			return false;
+		}
+		String alphas = "abcdefghijklmnopqrstuvwxyz";
+		for (int i = 0; i < alphas.length(); i++) {
+			if (sentence.indexOf(alphas.charAt(i)) == -1) {
+				return false;
+			}
+		}
+		return true;
     }
 }

@@ -5,7 +5,7 @@ class Solution {
 
         for (int i = 0; i < gain.length; i++) {
             sum += gain[i];
-            max = Math.max(max, sum);
+            max = Math.max(sum, max);
         }
 
         return max;

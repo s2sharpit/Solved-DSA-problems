@@ -4,9 +4,7 @@ class Solution {
 
         for (int i = 0; i < gain.length; i++) {
             sum += gain[i];
-            if (sum > max) {
-                max = sum;
-            }
+            max = Math.max(max, sum);
         }
 
         return max;

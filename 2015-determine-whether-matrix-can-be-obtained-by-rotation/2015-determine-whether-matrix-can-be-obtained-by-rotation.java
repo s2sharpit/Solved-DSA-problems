@@ -1,32 +1,16 @@
 class Solution {
     public boolean findRotation(int[][] mat, int[][] target) {
-        for (int rotate = 0; rotate < 4; rotate++) {
-            if (compareMatrices(mat, target)) {
-                return true;
-            }
-            target = rotate(target);
-        }
-        return false;
-    }
-
-    boolean compareMatrices(int[][] mat1, int[][] mat2) {
-        for (int i = 0; i < mat1.length; i++) {
-            for (int j = 0; j < mat1[0].length; j++) {
-                if (mat1[i][j] != mat2[i][j]) {
-                    return false;
-                }
+        int n = mat.length;
+        boolean []res = new boolean[4];
+        Arrays.fill(res, true);
+        for(int i = 0; i < mat.length; i++) {
+            for(int j = 0; j < mat[0].length; j++) {
+                if(mat[i][j] !=target[i][j]) res[0] = false; // 0
+                if(mat[i][j] != target[n-j-1][i]) res[1] = false; // 90
+                if(mat[i][j] != target[n-i-1][n-j-1]) res[2] = false; // 180
+                if(mat[i][j] != target[j][n-i-1]) res[3] = false; // 270
             }
         }
-        return true;
-    }
-
-    int[][] rotate(int[][] mat) {
-        int[][] res = new int[mat[0].length][mat.length];
-        for (int i = 0; i < mat.length; i++) {
-            for (int j = 0; j < mat[0].length; j++) {
-                res[j][mat.length - 1 - i] = mat[i][j];
-            }
-        }
-        return res;
+        return res[0] || res[1] || res[2] || res[3];
     }
 }

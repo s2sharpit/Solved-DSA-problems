@@ -1,17 +1,19 @@
 class Solution {
-    public int[] searchRange(int[] nums, int target) {
-        int[] res = {-1, -1};
-        for (int i = 0; i < nums.length; i++) {
-            if (nums[i] == target) {
-                res[0] = i;
-                while (i < nums.length) {
-                    if (nums[i] == target) {
-                        res[1] = i;
-                    }
-                    i++;
-                }
-            }
+    public int[] searchRange(int[] A, int target) {
+        int start = firstGreaterEqual(A, target);
+        if (start == A.length || A[start] != target) {
+            return new int[] { -1, -1 };
         }
-        return res;
+        return new int[] { start, firstGreaterEqual(A, target + 1) - 1 };
+    }
+
+    int firstGreaterEqual(int[] A, int target) {
+        int low = 0, high = A.length;
+        while (low < high) {
+            int mid = low + ((high - low) >> 1);
+            if (A[mid] < target) low = mid + 1;
+            else high = mid;
+        }
+        return low;
     }
 }

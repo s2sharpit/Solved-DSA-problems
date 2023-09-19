@@ -1,9 +1,8 @@
 class Solution {
     public int[] searchRange(int[] A, int target) {
         int start = firstGreaterEqual(A, target);
-        if (start == A.length || A[start] != target) {
+        if (start == A.length || A[start] != target)
             return new int[] { -1, -1 };
-        }
         return new int[] { start, firstGreaterEqual(A, target + 1) - 1 };
     }
 

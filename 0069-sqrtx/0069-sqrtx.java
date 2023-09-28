@@ -1,7 +1,7 @@
 class Solution {
     public int mySqrt(int x) {
-        int start = 1, end = x / 2;
-        if (x == 1) return 1;
+        if (x == 0) return 0;
+        int start = 1, end = x / 2 + 1;
 
         while (start <= end) {
             int mid = start + (end - start) / 2;

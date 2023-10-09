@@ -1,18 +1,33 @@
 class Solution {
-    public int[] searchRange(int[] A, int target) {
-        int start = firstGreaterEqual(A, target);
-        if (start == A.length || A[start] != target)
-            return new int[] { -1, -1 };
-        return new int[] { start, firstGreaterEqual(A, target + 1) - 1 };
+    public int[] searchRange(int[] nums, int target) {
+        int[] ans = {-1, -1};
+
+        ans[0] = search(nums, target, true);
+        ans[1] = search(nums, target, false);
+        
+        return ans;
     }
 
-    int firstGreaterEqual(int[] A, int target) {
-        int low = 0, high = A.length;
-        while (low < high) {
-            int mid = low + ((high - low) >> 1);
-            if (A[mid] < target) low = mid + 1;
-            else high = mid;
+    int search(int[] nums, int target, boolean findStartIndex) {
+    int ans = -1;
+    int start = 0, end = nums.length - 1;
+
+        while (start <= end) {
+            int mid = start + (end - start) / 2;
+
+            if (target < nums[mid]) {
+                end = mid - 1;
+            } else if (target > nums[mid]) {
+                start = mid + 1;
+            } else {
+                ans = mid;
+                if (findStartIndex) {
+                    end = mid - 1;
+                } else {
+                    start = mid + 1;
+                }
+            }
         }
-        return low;
+        return ans;
     }
 }

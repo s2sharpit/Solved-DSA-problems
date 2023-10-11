@@ -4,10 +4,10 @@ class Solution {
 
         while (l < r) {
             int m = l + (r - l) / 2;
-            if (nums[l] <= nums[m] && nums[m] > nums[r]) {
-                l = m + 1;
-            } else {
+            if (nums[m] < nums[r]) {
                 r = m;
+            } else {
+                l = m + 1;
             }
         }
         return nums[l];
